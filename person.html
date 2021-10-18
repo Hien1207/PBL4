@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Architectural, interior and brand design">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <link rel="stylesheet" href="person.css" media="screen">
+    <title>Page</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="person.js" defer=""></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="generator" content="Nicepage 3.26.5, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One:400|Inconsolata:200,300,400,500,600,700,800,900">
+
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "/"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Home">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="/">
+   
+  </head>
+  <body class="u-body" onload="nextSection1()">
+    <div class="container">
+    <div class="wrapper" >
+        <div class="sidebar">
+            <div class="profile">
+                <img src="images/07.jpg" alt="profile_picture">
+                <h3>Hoang ly</h3>
+            </div>
+            <div>
+            <ul>
+                <li>
+                    <a href="#tai-lieu" id="tailieu" >
+                        <span class="icon"><i class="fas fa-list-alt"></i></span>
+                        <span class="item">Tài liệu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#thong-tin" id="thongtin">
+                        <span class="icon"><i class="fas fa-sticky-note"></i></span>
+                        <span class="item">Thông tin</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#pro-file" id="profile">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#set-ting" id="setting">
+                        <span class="icon" ><i class="fas fa-cog" ></i></span>
+                        <span class="item">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="return">
+            <div class="logout" onclick="location.href = 'Home.html';"><span class="icon"><i class="fas fa-home"></i></span>Trang chủ</div>
+        </div>
+        <div class="container-page">
+            <section class="page home" id="tai-lieu">
+                <table class="table" id="table">
+                    <h3 style="margin-bottom: 0px;">Document</h3>
+                    <hr>
+                    <tr><th>Tiêu đề</th>
+                        <th>File</th>
+                        <th>Mô tả chi tiết</th>
+                        <th></th>
+                    </tr>
+                    <tr><th>Toán đồ thị</th>
+                        <th>abđcd</th>
+                        <th>các dạng đồ thị</th>
+                        <th> <button style="border: none;"><span class="icon_e"><i class="fas fa-edit"></i></button> </span>
+                            <button style="border: none;"><span class="icon_d"><i class="fas fa-trash"></i></button></span>
+                        </th>
+                    </tr>
+                </table>
+            </section>
+            <section class="page home" id="thong-tin">
+                <table class="table" id="table">
+                    <h3 style="margin-bottom: 0px;">News</h3>
+                    <hr>
+                    <tr><th>Tiêu đề</th>
+                        <th>Nội dung</th>
+                        <th></th>
+                    </tr>
+                    <tr><th>Thông báo trở lại trường</th>
+                        <th>Bắt đầu từ ngày....</th>
+                        <th><button style="border: none;"><span class="icon_e"><i class="fas fa-edit"></i></button> </span>
+                            <button style="border: none;"><span class="icon_d"><i class="fas fa-trash"></i></button></span>
+                        </th>
+                    </tr>
+                </table>
+            </section>
+            <section class="page home" id="pro-file">
+                <div class="profile-container">
+                    <!-- User Avatar -->
+                    <div style="display:flex">
+                      <div >
+                        <h2>Avatar</h2>
+                        <p >Change your avatar here</p>
+                      </div>
+                      <div style="display: flex;margin-left:150px">
+                        <div><img class="img" id="img1" alt=""></div>
+                        <div style="margin: 30px;">
+                        <input type="button" onclick="btn(0)" id="choosefile" value="Choose file"
+                            style="display: block;"/>
+                        <input class="files" type="file" accept="image/x-png,image/gif,image/jpeg" hidden>
+                          <p >
+                            Maxium file size allowed is 200KB.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <!-- User Infomation -->
+                    <div style="display: flex;margin-top:30px">
+                        <div>
+                          <h2>Main Setting</h2>
+                          <p >Change your information here</p>
+                        </div>
+                        <div style="margin:20px 120px;">
+                          <div>
+                            <div class="profile-user-item">
+                              <label class="label" for="user-name">Full name</label>
+                              <input
+                                id="user-name"
+                                type="text"
+                                v-model="user.displayName"
+                                placeholder="You haven't fill in this yet."
+                                class="profile-user-input"
+                              />
+                            </div>
+                            <div class="profile-user-item">
+                              <label class="label" for="user-email">Email</label>
+                              <input
+                                id="user-email"
+                                type="text"
+                                v-model="user.email"
+                                placeholder="You haven't fill in this yet."
+                                class="profile-user-input"
+                              />
+                          </div>
+                            <div class="profile-user-item">
+                              <label class="label" for="user-phone">Password</label>
+                              <input
+                                id="user-phone"
+                                type="text"
+                                v-model="user.password"
+                                placeholder="You haven't fill in this yet."
+                                class="profile-user-input"
+                              />
+                          </div>
+                      </div>
+                      <!-- Update User -->
+                      <div >
+                        <button class=" u-btn u-button-style u-palette-1-base u-text-body-alt-color u-btn-1">Update profile settings</button>
+     
+                     </div>
+                  </div>     
+              </div>       
+             </div>
+                </div>
+                    
+            </section>
+            <section class="page home" id="set-ting">
+                
+            </section>
+        </div>
+    </div>
+    </div>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+            }
+        }
+    </script>
+  </body>
+</html>
