@@ -77,7 +77,6 @@ if(isset($_POST['edit']))
 	<div class="container">
 		<br />
         <br />
-        <h1 class="text-center">PHP Chat Application using Websocket</h1>
         <br />
         <br />
         <?php echo $message; ?>
@@ -85,7 +84,6 @@ if(isset($_POST['edit']))
 			<div class="card-header">
                 <div class="row">
                     <div class="col-md-6">Profile</div>
-                    <div class="col-md-6 text-right"><a href="chatroom.php" class="btn btn-warning btn-sm">Go to Chat</a></div>
                 </div>
             </div>
             <div class="card-body">

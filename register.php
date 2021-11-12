@@ -14,10 +14,10 @@ if(isset($_POST["register"]))
 {
     session_start();
 
-    if(isset($_SESSION['user_data']))
-    {
-        header('location:chatroom.php');
-    }
+    // if(isset($_SESSION['user_data']))
+    // {
+    //     header('location:index.php');
+    // }
 
     require_once('database/ChatUser.php');
 
@@ -31,7 +31,7 @@ if(isset($_POST["register"]))
 
     $user_object->setUserProfile($user_object->make_avatar(strtoupper($_POST['user_name'][0])));
 
-    $user_object->setUserStatus('Disabled');
+    $user_object->setUserStatus('Enable');
 
     $user_object->setUserCreatedOn(date('Y-m-d H:i:s'));
 
@@ -69,19 +69,17 @@ if(isset($_POST["register"]))
 
             $mail->isHTML(true);
 
-            $mail->Subject = 'Registration Verification for Chat Application Demo';
+            $mail->Subject = 'Registration Verification ';
 
             $mail->Body = '
-            <p>Thank you for registering for Chat Application Demo.</p>
-                <p>This is a verification email, please click the link to verify your email address.</p>
-                <p><a href="http://localhost:81/tutorial/chat_application/verify.php?code='.$user_object->getUserVerificationCode().'">Click to Verify</a></p>
-                <p>Thank you...</p>
+            <p>Thank you for registering for ABC SCHOOL website.</p>
+                
             ';
 
             $mail->send();
 
 
-            $success_message = 'Verification Email sent to ' . $user_object->getUserEmail() . ', so before login first verify your email';
+            $success_message = 'Create account success! Click login to access ABC SCHOOL website';
         }
         else
         {
@@ -104,7 +102,7 @@ if(isset($_POST["register"]))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Register | PHP Chat Application using Websocket</title>
+    <title>Register </title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -128,7 +126,7 @@ if(isset($_POST["register"]))
     <div class="containter">
         <br />
         <br />
-        <h1 class="text-center">Chat Application in PHP & MySql using WebSocket - Email Verification</h1>
+        <h1 class="text-center">Register Account</h1>
         
         <div class="row justify-content-md-center">
             <div class="col col-md-4 mt-5">
@@ -177,6 +175,9 @@ if(isset($_POST["register"]))
 
                             <div class="form-group text-center">
                                 <input type="submit" name="register" class="btn btn-success" value="Register" />
+                            </div>
+                            <div class="form-group text-center">
+                                <a href="index.php">Have you had account? Login</a>
                             </div>
 
                         </form>

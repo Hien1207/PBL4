@@ -24,18 +24,7 @@ class ChatUser
 		$database_object = new Database_connection;
 
 		$this->connect = $database_object->connect();
-		// $this->user_id = $user_id;
-		// $this->user_name =$user_name;
-		// $this->user_email =$user_email;
-		// $this->user_password =$user_password;
-		// $this->user_profile =$user_profile;
-		// $this->user_status =$user_status;
-		// $this->user_created_on =$user_created_on;
-		// $this->user_verification_code =$user_verification_code;
-		// $this->user_login_status =$user_login_status;
-		// $this->user_token =$user_token;
-		// $this->$user_connection_id =$$user_connection_id;
-		// $this->connect =$connect;
+
 
 	}
 
@@ -183,29 +172,7 @@ class ChatUser
 			$user_data = $statement->fetch(PDO::FETCH_ASSOC);
 		}
 		return $user_data;
-		// $link=mysqli_connect("localhost","root","") or die ("khong the ket noi CSDL");
-		// $db_selected =mysqli_select_db($link, 'chat');
-		// $user_email=$this->user_email;
-		// $rs = mysqli_query($link, "Select * from chat_user_table where username='$user_email'  ; ");
-		// $i=0;
-        // $users=[];
-        // while ($row = mysqli_fetch_array($rs))
-        // {
-		// 	 $user_id =$row['user_id'];
-		// 	 $user_name=$row['user_name'];
-		// 	$user_email=$row['user_email'];
-		// 	$user_password=$row['user_password'];
-		// 	$user_profile=$row['user_profile'];
-		// 	$user_status=$row['user_status'];
-		// 	$user_created_on=$row['user_created_on'];
-		// 	$user_verification_code=$row['user_verification_code'];
-		// 	$user_login_status=$row['user_login_status'];
-          
-        //     $students[$i++] = new ChatUser($user_id, $user_name, $user_email, $user_password, $user_profile, $user_status, $user_created_on, $user_verification_code,
-		// 	$user_login_status, "","","");
-        // }
-        // return $students;
-		// return $rs;
+	
 	}
 
 	function save_data()
@@ -291,7 +258,7 @@ class ChatUser
 	{
 		$query = "
 		UPDATE chat_user_table 
-		SET user_login_status = :user_login_status, user_token = :user_token  
+		SET user_login_status = :user_login_status 
 		WHERE user_id = :user_id
 		";
 
@@ -299,7 +266,7 @@ class ChatUser
 
 		$statement->bindParam(':user_login_status', $this->user_login_status);
 
-		$statement->bindParam(':user_token', $this->user_token);
+		// $statement->bindParam(':user_token', $this->user_token);
 
 		$statement->bindParam(':user_id', $this->user_id);
 

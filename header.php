@@ -1,3 +1,18 @@
+<?php 
+
+//privatechat.php
+
+session_start();
+
+if(!isset($_SESSION['user_data']))
+{
+	header('location:index.php');
+}
+
+require('database/ChatUser.php');
+
+
+?>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
   <head>
@@ -21,7 +36,6 @@
 		"name": "",
 		"url": "/"
     }</script>
-
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
@@ -30,36 +44,72 @@
   <body class="u-body" >
     <header class="u-clearfix u-header u-palette-1-base u-header" id="sec-61e1">
         <div class="u-clearfix u-sheet u-sheet-1"  style="display: flex;">
-        <h1 class="u-custom-font u-text u-text-default u-text-2" style="margin: 25px 0px;">ABC SCHOOL<span style="font-weight: 700;">
+        <h1 class="u-custom-font u-text u-text-default u-text-2" style="margin: 12px 0px;">ABC SCHOOL<span style="font-weight: 700;">
             <span style="font-weight: 400;">
               <span style="font-style: italic;"></span>
             </span>
           </span>
         </h1>
-      <!-- <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" style="margin-top:25px;margin-right:0%">
-        <div class="u-custom-menu u-nav-container" style="height:6px">
-          <ul class="u-nav u-spacing-30 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-white u-text-grey-5 u-text-hover-grey-90" href="" style="padding: 10px 0px;">Home</a>
-            </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-white u-text-grey-5 u-text-hover-grey-90" href="News.html" style="padding: 10px 0px;">News</a>
-            </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-white u-text-grey-5 u-text-hover-grey-90" href="" style="padding: 10px 0px;">Document</a>
-            </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-white u-text-grey-5 u-text-hover-grey-90"  href="Chat.html" style="padding: 10px 0px;">Chat</a>
-            </li>
-        </ul>
-       
+     
+      <div class="u-nav u-spacing-30 u-unstyled u-nav-1" style="margin-left:50%;margin-top :15px;display:flex" >
+        <a style="color:white;margin-right:20px"  href="home.php" target="main">Home</a>
+        <a style="color:white;margin-right:20px"  href="news.php" target="main">News</a>
+        <a style="color:white;margin-right:20px"  href="chat.php" target="main">Chat</a>
+        <div class="dropdown" style="display:flex">
+        <button onclick="myFunction()" class="dropbtn" style="padding: 0px;height:10px"><img src="https://cdn1.iconfinder.com/data/icons/menu-flat-shaded-1/512/DropDown_Menu-2-512.png" style="width:30px"></button>
+        <div id="myDropdown" class="dropdown-content" >
+        <a style="padding: 0px;" href='profile.php' target="main" >PROFILE</a>
+				<button style="padding: 0px;"  id="logout" name="logout" >LOG OUT</button>
         </div>
-      </nav> -->
-      <div>
-        <a href="home.php" target="main">Home</a>
-        <a href="news.php" target="main">News</a>
-        <a href="chatroom.php" target="main">Chat</a>
       </div>
-      <!-- <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn"><img src="" style="width: 60px;border-radius:50%" /></button>
-        <div id="myDropdown" class="dropdown-content">
-        <a href="#" onclick="location.href = 'person.html';">Trang cá nhân</a>
-        <a href="#" onclick="location.href = 'Login.html';">Đăng xuất</a>
-        </div> -->
+      
     </div>
       
     </div></header>
+     <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+            }
+        }
+        
+        $('#logout').click(function(){
+
+        user_id = $('#login_user_id').val();
+
+        $.ajax({
+          url:"action.php",
+          method:"POST",
+          data:{user_id:user_id, action:'leave'},
+          success:function(data)
+          {
+            var response = JSON.parse(data);
+            if(response.status == 1)
+            {
+              conn.close();
+
+              location = 'index.php';
+            }
+          }
+        })
+
+        });
+
+
+    </script>
    
   

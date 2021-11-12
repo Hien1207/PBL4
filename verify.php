@@ -64,7 +64,7 @@ if(isset($_GET['code']))
     <div class="containter">
         <br />
         <br />
-        <h1 class="text-center">PHP Chat Application using Websocket</h1>
+        <h1 class="text-center">ABC SCHOOL</h1>
         
         <div class="row justify-content-md-center">
             <div class="col col-md-4 mt-5">

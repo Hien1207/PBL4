@@ -33,7 +33,7 @@ if(isset($_POST['login']))
 
                 $user_object->setUserToken($user_token);
 
-                // if($user_object->update_user_login_data())
+                if($user_object->update_user_login_data())
                 {
                     $_SESSION['user_data'][$user_data['user_id']] = [
                         'id'    =>  $user_data['user_id'],
@@ -73,7 +73,7 @@ if(isset($_POST['login']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Load Chat from Mysql Database | PHP Chat Application using Websocket</title>
+    <title>ABC SCHOOL</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">

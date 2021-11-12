@@ -4,8 +4,8 @@
 <head>
 </head>
 
-<frameset rows="100, *" noresize>
-    <frame src="header.php" ></frame> 
+<frameset rows="70, *" noresize >
+    <frame src="header.php"  ></frame> 
     <frame src="home.php" name="main" ></frame>
   
   

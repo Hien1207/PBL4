@@ -1,24 +1,19 @@
 <?php 
 
-//privatechat.php
-
 session_start();
 
 if(!isset($_SESSION['user_data']))
 {
 	header('location:index.php');
 }
-
 require('database/ChatUser.php');
-
-require('database/ChatRooms.php');
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chat application in php using web scocket programming</title>
+	<title>Private chat</title>
 	<!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">
 
@@ -101,8 +96,8 @@ require('database/ChatRooms.php');
 				<div class="mt-3 mb-3 text-center">
 					<img src="<?php echo $value['profile']; ?>" class="img-fluid rounded-circle img-thumbnail" width="150" />
 					<h3 class="mt-2"><?php echo $value['name']; ?></h3>
-					<a href="profile.php" class="btn btn-secondary mt-2 mb-2">Edit</a>
-					<input type="button" class="btn btn-primary mt-2 mb-2" id="logout" name="logout" value="Logout" />
+					<!-- <a href="profile.php" class="btn btn-secondary mt-2 mb-2">Edit</a> -->
+					<!-- <input type="button" class="btn btn-primary mt-2 mb-2" id="logout" name="logout" value="Logout" /> -->
 				</div>
 				<?php
 				}
@@ -119,7 +114,7 @@ require('database/ChatRooms.php');
 					
 					foreach($user_data as $key => $user)
 					{
-						$icon = '<i class="fa fa-circle text-danger"></i>';
+						$icon = '<i class="fa fa-circle text-danger"></i>'; 
 
 						if($user['user_login_status'] == 'Login')
 						{
@@ -159,9 +154,6 @@ require('database/ChatRooms.php');
 			
 			<div class="col-lg-9 col-md-8 col-sm-7">
 				<br />
-		        <h3 class="text-center">Realtime One to One Chat App using Ratchet WebSockets with PHP Mysql - Online Offline Status - 8</h3>
-		        <hr />
-		        <br />
 		        <div id="chat_area"></div>
 			</div>
 			
@@ -264,7 +256,6 @@ require('database/ChatRooms.php');
 							<b>Chat with <span class="text-danger" id="chat_user_name">`+user_name+`</span></b>
 						</div>
 						<div class="col col-sm-6 text-right">
-							<a href="chatroom.php" class="btn btn-success btn-sm">Group Chat</a>&nbsp;&nbsp;&nbsp;
 							<button type="button" class="close" id="close_chat_area" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -272,10 +263,8 @@ require('database/ChatRooms.php');
 					</div>
 				</div>
 				<div class="card-body" id="messages_area">
-
 				</div>
 			</div>
-
 			<form id="chat_form" method="POST" data-parsley-errors-container="#validation_error">
 				<div class="input-group mb-3" style="height:7vh">
 					<textarea class="form-control" id="chat_message" name="chat_message" placeholder="Type Message Here" data-parsley-maxlength="1000" data-parsley-pattern="/^[a-zA-Z0-9 ]+$/" required></textarea>
@@ -403,28 +392,7 @@ require('database/ChatRooms.php');
 
 		});
 
-		$('#logout').click(function(){
-
-			user_id = $('#login_user_id').val();
-
-			$.ajax({
-				url:"action.php",
-				method:"POST",
-				data:{user_id:user_id, action:'leave'},
-				success:function(data)
-				{
-					var response = JSON.parse(data);
-					if(response.status == 1)
-					{
-						conn.close();
-
-						location = 'index.php';
-					}
-				}
-			})
-
-		});
-
+		
 	})
 </script>
 </html>
