@@ -53,7 +53,7 @@ class News
 	}
 
 	function getCreatedOn()
-	{
+	{ 
 		return $this->created_on;
 	}
 
@@ -78,9 +78,9 @@ class News
 
 		$statement->bindParam(':user_id', $this->user_id);
 
-		$statement->bindParam(':title', $this->user_id);
+		$statement->bindParam(':title', $this->title);
 
-		$statement->bindParam(':content', $this->message);
+		$statement->bindParam(':content', $this->content);
 
 		$statement->bindParam(':created_on', $this->created_on);
 

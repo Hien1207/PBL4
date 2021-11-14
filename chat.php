@@ -25,9 +25,9 @@
         .form{
             width: 30%;
             height: 300px;
-            background-color: pink;
-            padding: 9%;
-            margin: 7% 3% 7% 10%;
+            background-color: white;
+            padding: 6%;
+            margin: 10% 5% 10% 15%;
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
             transition: transform .2s;
         }  
@@ -36,17 +36,17 @@
         }
     </style>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Chat">
+    <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
     <link rel="canonical" href="/">
   </head>
   <body class="u-body">
     <section class="u-align-center u-clearfix u-gradient h-section-1" id="carousel_0fb8" style="height: 647px;display:flex">
        <div class="form">
-       <a style="color:black;margin-right:20px;font-size:50px;font-family: futura-light;"  href="chatroom.php" target="main">Group Chat</a>
+       <a style="color:black;margin-right:10px;font-size:50px;font-family: futura-light;"  href="chatroom.php" target="main">Group Chat</a>
        </div>
-       <div class="form" style="margin: 7%;">
-       <a style="color:black;margin-right:20px;font-size:50px;font-family: futura-light;"  href="privatechat.php" target="main">Private Chat</a>
+       <div class="form" style="margin: 10% 5%;">
+       <a style="color:black;margin-right: 10px;font-size:50px;font-family: futura-light;"  href="privatechat.php" target="main">Private Chat</a>
        </div>
     </section>
   </body>

@@ -71,7 +71,7 @@ $user_data = $user_object->get_user_all_data();
 
 		#messages_area
 		{
-			height: 460px;
+			height: 350px;
 			overflow-y: auto;
 			background-color:#e6e6e6;
 		}
@@ -142,19 +142,14 @@ $user_data = $user_object->get_user_all_data();
 			<div class="col-lg-4">
 				<?php
 
-				$login_user_id = '';
+				$login_user_id = ''; 
 
 				foreach($_SESSION['user_data'] as $key => $value)
 				{
 					$login_user_id = $value['id'];
 				?>
 				<input type="hidden" name="login_user_id" id="login_user_id" value="<?php echo $login_user_id; ?>" />
-				<!-- <div class="mt-3 mb-3 text-center">
-					<img src="<?php echo $value['profile']; ?>" width="150" class="img-fluid rounded-circle img-thumbnail" />
-					<h3 class="mt-2"><?php echo $value['name']; ?></h3>
-					<a href="profile.php" class="btn btn-secondary mt-2 mb-2">Edit</a>
-					<input type="button" class="btn btn-primary mt-2 mb-2" name="logout" id="logout" value="Logout" />
-				</div> -->
+			
 				<?php
 				}
 				?>

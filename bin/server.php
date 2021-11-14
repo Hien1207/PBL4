@@ -13,6 +13,7 @@ use MyApp\Chat;
         new HttpServer(
             new WsServer(
                 new Chat()
+             
             )
         ),
         8080

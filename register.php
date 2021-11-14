@@ -14,10 +14,10 @@ if(isset($_POST["register"]))
 {
     session_start();
 
-    // if(isset($_SESSION['user_data']))
-    // {
-    //     header('location:index.php');
-    // }
+    if(isset($_SESSION['user_data']))
+    {
+        header('location:index.php');
+    }
 
     require_once('database/ChatUser.php');
 
