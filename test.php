@@ -20,14 +20,23 @@ $user_data = $user_object->get_user_all_data();
 
 
 
+				$login_user_id = '';
+        $login_user_name = '';
+				foreach($_SESSION['user_data'] as $key => $value)
+				{
+					$login_user_id = $value['id'];
+          $login_user_name=$value['name'];
+          $login_user_profile=$value['profile'];
+          
+        }
 
 ?>
 <!DOCTYPE html>
 <html style="font-size: 16px;">
   <head>
+   
     
-    
-    <link href="./vendor-front/bootstrap/nicepage.css" rel="stylesheet">
+  <link href="./vendor-front/bootstrap/nicepage.css" rel="stylesheet">
     <link href="./vendor-front/bootstrap/style.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="vendor-front/parsley/parsley.css"/>
 
@@ -39,7 +48,7 @@ $user_data = $user_object->get_user_all_data();
     <script src="vendor-front/jquery-easing/jquery.easing.min.js"></script>
 	<script type="text/javascript" src="vendor-front/parsley/dist/parsley.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-	<script type="application/ld+json">
+    <script type="application/ld+json">
     {
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -112,6 +121,10 @@ $user_data = $user_object->get_user_all_data();
   display: flex;
   flex-direction: column;
 }
+.preview{
+  width: 50px;
+  height: 50px;
+}
   label {
       font-family:"Pacifico", cursive;
       margin-right: 10px;
@@ -163,7 +176,7 @@ $user_data = $user_object->get_user_all_data();
 .post-box__text {
   border-radius: 8px;
   padding-top: 10px;
-  height: 250px;
+  height: 150px;
   background-color: rgb(224, 224, 224);
 }
 .post-box__text--input {
@@ -223,7 +236,6 @@ $user_data = $user_object->get_user_all_data();
 						
 								<div style="padding: 2% 10%; ">
 								  <div style="background-color: #e6e6e6; border-radius: 5px">
-									<img src="'.$chat["user_profile"].'" class="img-fluid rounded-circle img-thumbnail"  />
 									<b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
                                     <small> <i>'.$chat["created_on"].'</i> </small>
 									<b style="color: red">'.$chat["title"].' </b>
@@ -240,12 +252,28 @@ $user_data = $user_object->get_user_all_data();
 					}
 					?>
       </div>
-      
-       
-        <form method="post"  id="news_form" class="post-container__form" data-parsley-errors-container="#validation_error">
+      <div class="post">
+          <button class="btn_new" onclick="openMenu()">+ NEW</button>
+      </div>
+        <div class="post-container" id="post">
+        <div class="post-container__header">
+          <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
+          <h4  class="post-title">Post information</h4>
+          <div style="margin-left: 200px;">
+                 <i class="fas fa-times" onclick="closeMenu()" id="fas-close"></i>
+          </div>
+        </div>
+        <form method="post" @submit.prevent="postBlog" name ="news_form" id="news_form" class="post-container__form" data-parsley-errors-container="#validation_error">
           <div class="blog-title">
             <label for="">Title: </label>
-            <input class="input-title" type="text" name="title" id="title" placeholder="Your blog title" required/>
+            <input
+              class="input-title"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Your blog title"
+             
+            />
           </div>
           <div class="post-option">
             <div class="post-option__content"></div>
@@ -257,17 +285,23 @@ $user_data = $user_object->get_user_all_data();
                 id="content"
                 class="post-box__text--input"
                 cols="30"
-                rows="12"
-				required
+                rows="10"
               ></textarea>
             </div>
           </div>
-          <div class="post-box__send">
-              <button type="submit">Submit</button>
+          <div>
+                <input type='file' name="file" id="file" style="font-size: 10px;" placeholder="Image" />
+                <div class="preview">
+                  <img id="img" style="width: 50px; height:50px" src="" />
+                </div>
+                
           </div>
-		 
+          <div class="post-box__send">
+              <button type="submit" class="btn-send" ></button>
+          </div>
         </form>
-		<p name="test" id="test"></p>
+
+       
         </div>
 
   
@@ -280,25 +314,38 @@ $user_data = $user_object->get_user_all_data();
     
 
 <script type="text/javascript">
-		$(document).ready(function(){
+	function openMenu() {
+    document.getElementById("post").style.left = "6%";
+    }
 
-var conn = new WebSocket('ws://localhost:8080');
-conn.onopen = function(e) {
-	console.log("Connection established!");
-};
+  function closeMenu() {
+    document.getElementById("post").style.left = "80%";
+    }
+	$(document).ready(function(){
 
-conn.onmessage = function(e) {
-	console.log(e.data);
+		var conn = new WebSocket('ws://localhost:8080');
+		conn.onopen = function(e) {
+		    console.log("Connection established!");
+		};
 
-	var data = JSON.parse(e.data);
+		conn.onmessage = function(e) {
+		    console.log(e.data);
 
-	var row_class = '';
+		    var data = JSON.parse(e.data);
 
-	var background_class = '';
+		    var row_class = '';
 
-	
+		    var background_class = '';
 
-};
+		    
+		    var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px">	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /></div>	</div>'; 
+
+		    $('#infor').prepend(html_data);
+
+		    $("#title").val("");
+        $("#content").val("");
+
+		};
 
 		$('#news_form').parsley();
 
@@ -308,43 +355,72 @@ conn.onmessage = function(e) {
 			event.preventDefault();
 
 			if($('#news_form').parsley().isValid())
-			{
-                var user_id= 11;
+			{  
+          var user_id= $('#login_user_id').val();
 
-				var title = "title11";
+				  var title = $('#title').val();
 
-        		var content="content11";
-				var data = {
-					userId : user_id,
-					Title : title,
+        	var content=$('#content').val();
+
+          var files =$('#file')[0].files;
+          var fd = new FormData();
+
+          if (files.length > 0)
+          {
+             fd.append('file',files[0]);
+             var name='upload/'+files[0]['name'];
+             $.ajax({
+                url:'upload.php',
+                type:'post',
+                data: fd, 
+                contentType:false,
+                processData:false,
+                success: function(response)
+                {
+                  if (response !=0 )
+                  {
+                     $("#img").attr("src", response);
+                     $(".preview img").show();
+                  }
+                }
+              });
+              
+              var data = {
+					      userId : user_id,
+					      Title : title,
           			msg : content,
+                FileName: name,
           			command:'news'
 				};
 
 				conn.send(JSON.stringify(data));
+             
+      }
+          
+         
 			}
 
 		});
 		
-	});
 
+	});
 	
 </script>
 <script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+//   function readURL(input) {
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
         
-        reader.onload = function (e) {
-            $('#img').attr('src', e.target.result);
-        }
+//         reader.onload = function (e) {
+//             $('#img').attr('src', e.target.result);
+//         }
         
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
 
-$("#imgInp").change(function(){
-    readURL(this);
-});
+// $("#imgInp").change(function(){
+//     readURL(this);
+// });
 </script>
 </html>

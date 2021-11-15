@@ -127,7 +127,7 @@ class Chat implements MessageComponentInterface {
         //     }
         // }
         if($data['command'] == 'news')
-        {
+        {    //news
             $chat_object = new \News;
 
             $chat_object->setUserId($data['userId']);
@@ -135,6 +135,8 @@ class Chat implements MessageComponentInterface {
             $chat_object->setTitle($data['Title']);
     
             $chat_object->setContent($data['msg']);
+
+            $chat_object->setFileName($data['FileName']);
     
             $chat_object->setCreatedOn(date("Y-m-d"));
     

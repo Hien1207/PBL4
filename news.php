@@ -121,6 +121,10 @@ $user_data = $user_object->get_user_all_data();
   display: flex;
   flex-direction: column;
 }
+.preview{
+  width: 50px;
+  height: 50px;
+}
   label {
       font-family:"Pacifico", cursive;
       margin-right: 10px;
@@ -172,7 +176,7 @@ $user_data = $user_object->get_user_all_data();
 .post-box__text {
   border-radius: 8px;
   padding-top: 10px;
-  height: 250px;
+  height: 150px;
   background-color: rgb(224, 224, 224);
 }
 .post-box__text--input {
@@ -226,25 +230,49 @@ $user_data = $user_object->get_user_all_data();
       <?php
 					foreach($chat_data as $chat)
 					{
-
-						echo '
+            if($chat["file_name"] !="")
+            {
+              echo '
 					
 						
-								<div style="padding: 2% 10%; ">
-								  <div style="background-color: #e6e6e6; border-radius: 5px">
-									<b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
-                                    <small> <i>'.$chat["created_on"].'</i> </small>
-									<b style="color: red">'.$chat["title"].' </b>
-									<br />
-                                    <p>'.$chat["content"].'</p>
-                                    <br />
-									</div>
-                                    
-                                    
-								</div>
-						
+              <div style="padding: 2% 10%; ">
+                <div style="background-color: #e6e6e6; border-radius: 5px">
+                <b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
+                                  <small> <i>'.$chat["created_on"].'</i> </small>
+                <b style="color: red">'.$chat["title"].' </b>
+                <br />
+                                  <p>'.$chat["content"].'</p>
+                                  <br />
+                <img src="'.$chat["file_name"].'" style="width: 200px; height: 200px">
+                </div>
+                                  
+                                  
+              </div>
+          
+        
+          ';
+            }
+            else{
+              echo '
 					
-						';
+						
+              <div style="padding: 2% 10%; ">
+                <div style="background-color: #e6e6e6; border-radius: 5px">
+                <b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
+                                  <small> <i>'.$chat["created_on"].'</i> </small>
+                <b style="color: red">'.$chat["title"].' </b>
+                <br />
+                                  <p>'.$chat["content"].'</p>
+                                  <br />
+                </div>
+                                  
+                                  
+              </div>
+          
+        
+          ';
+            }
+						
 					}
 					?>
       </div>
@@ -281,18 +309,23 @@ $user_data = $user_object->get_user_all_data();
                 id="content"
                 class="post-box__text--input"
                 cols="30"
-                rows="12"
+                rows="10"
               ></textarea>
             </div>
           </div>
-          <!-- <div>
-                <input type='file' id="imgInp" style="font-size: 10px;" placeholder="Image" />
-                <img id="img" src="#" style="width:15%"/>
-          </div> -->
+          <div>
+                <input type='file' name="file" id="file" style="font-size: 10px;" placeholder="Image" />
+                <div class="preview">
+                  <img id="img" style="width: 50px; height:50px" src="" />
+                </div>
+                
+          </div>
           <div class="post-box__send">
-              <button type="submit" class="btn-send"></button>
+              <button type="submit" class="btn-send" ></button>
           </div>
         </form>
+
+       
         </div>
 
   
@@ -328,8 +361,16 @@ $user_data = $user_object->get_user_all_data();
 
 		    var background_class = '';
 
-		    
-		    var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px">	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /></div>	</div>'; 
+		    if (data.FileName !="")
+        {
+          var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px">	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> <img src="'+data.FileName+'" style="width: 200px; height: 200px"> </div>	</div>'; 
+
+        }
+        else
+        {
+          var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px">	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> </div>	</div>'; 
+
+        }
 
 		    $('#infor').prepend(html_data);
 
@@ -346,20 +387,50 @@ $user_data = $user_object->get_user_all_data();
 			event.preventDefault();
 
 			if($('#news_form').parsley().isValid())
-			{
+			{  
           var user_id= $('#login_user_id').val();
 
-				  var title = $('#title').val();;
+				  var title = $('#title').val();
 
-        	var content=$('#content').val();;
-				  var data = {
+        	var content=$('#content').val();
+
+          var files =$('#file')[0].files;
+          var fd = new FormData();
+
+          if (files.length > 0)
+          {
+             fd.append('file',files[0]);
+             var name='upload/'+files[0]['name'];
+             $.ajax({
+                url:'upload.php',
+                type:'post',
+                data: fd, 
+                contentType:false,
+                processData:false,
+                success: function(response)
+                {
+                  if (response !=0 )
+                  {
+                     $("#img").attr("src", response);
+                     $(".preview img").show();
+                  }
+                }
+              });
+              
+              
+             
+      }
+      else name="";
+      var data = {
 					      userId : user_id,
 					      Title : title,
           			msg : content,
+                FileName: name,
           			command:'news'
 				};
 
 				conn.send(JSON.stringify(data));
+         
 			}
 
 		});
@@ -369,20 +440,20 @@ $user_data = $user_object->get_user_all_data();
 	
 </script>
 <script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+//   function readURL(input) {
+//     if (input.files && input.files[0]) {
+//         var reader = new FileReader();
         
-        reader.onload = function (e) {
-            $('#img').attr('src', e.target.result);
-        }
+//         reader.onload = function (e) {
+//             $('#img').attr('src', e.target.result);
+//         }
         
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+//         reader.readAsDataURL(input.files[0]);
+//     }
+// }
 
-$("#imgInp").change(function(){
-    readURL(this);
-});
+// $("#imgInp").change(function(){
+//     readURL(this);
+// });
 </script>
 </html>

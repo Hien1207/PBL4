@@ -6,6 +6,7 @@ class News
 	private $user_id;
 	private $content;
 	private $title;
+	private $file_name;
 	private $created_on;
 	protected $connect;
 
@@ -47,6 +48,16 @@ class News
 		return $this->content;
 	}
 
+	function setFileName($file_name)
+	{
+		$this->file_name=$file_name;
+	}
+
+    function getFileName()
+	{
+		return $this->file_name;
+	}
+
 	function setCreatedOn($created_on)
 	{
 		$this->created_on = $created_on;
@@ -70,8 +81,8 @@ class News
 	{
 		$query = "
 		INSERT INTO news 
-			(user_id, title, content, created_on) 
-			VALUES (:user_id, :title, :content, :created_on)
+			(user_id, title, content,file_name, created_on) 
+			VALUES (:user_id, :title, :content, :file_name, :created_on)
 		";
 
 		$statement = $this->connect->prepare($query);
@@ -81,6 +92,8 @@ class News
 		$statement->bindParam(':title', $this->title);
 
 		$statement->bindParam(':content', $this->content);
+
+		$statement->bindParam(':file_name', $this->file_name);
 
 		$statement->bindParam(':created_on', $this->created_on);
 
