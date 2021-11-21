@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_FILES['file']['name'])){
-
+ 
    /* Getting file name */
    $filename = $_FILES['file']['name'];
 

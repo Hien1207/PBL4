@@ -66,67 +66,71 @@ class Chat implements MessageComponentInterface {
 
         $data = json_decode($msg, true);
 
-        // if($data['command'] == 'private')
-        // {
-        //     //private chat
+        if($data['command'] == 'private')
+        {
+            //private chat
 
-        //     $private_chat_object = new \PrivateChat;
+            $private_chat_object = new \PrivateChat;
 
-        //     $private_chat_object->setToUserId($data['receiver_userid']);
+            $private_chat_object->setToUserId($data['receiver_userid']);
 
-        //     $private_chat_object->setFromUserId($data['userId']);
+            $private_chat_object->setFromUserId($data['userId']);
 
-        //     $private_chat_object->setChatMessage($data['msg']);
+            $private_chat_object->setChatMessage($data['msg']);
 
-        //     $timestamp = date('Y-m-d h:i:s');
+            $timestamp = date('Y-m-d h:i:s');
 
-        //     $private_chat_object->setTimestamp($timestamp);
+            $private_chat_object->setTimestamp($timestamp);
 
-        //     $private_chat_object->setStatus('Yes');
+            $private_chat_object->setStatus('Yes');
 
-        //     $chat_message_id = $private_chat_object->save_chat();
+            $chat_message_id = $private_chat_object->save_chat();
 
-        //     $user_object = new \ChatUser;
+            $user_object = new \ChatUser;
 
-        //     $user_object->setUserId($data['userId']);
+            $user_object->setUserId($data['userId']);
 
-        //     $sender_user_data = $user_object->get_user_data_by_id();
+            $sender_user_data = $user_object->get_user_data_by_id();
 
-        //     $user_object->setUserId($data['receiver_userid']);
+            $user_object->setUserId($data['receiver_userid']);
 
-        //     $receiver_user_data = $user_object->get_user_data_by_id();
+            $receiver_user_data = $user_object->get_user_data_by_id();
 
-        //     $sender_user_name = $sender_user_data['user_name'];
+            $sender_user_name = $sender_user_data['user_name'];
 
-        //     $data['datetime'] = $timestamp;
+            $data['datetime'] = $timestamp;
 
-        //     $receiver_user_connection_id = $receiver_user_data['user_connection_id'];
+            $user_object1 = new \ChatUser;
 
-        //     foreach($this->clients as $client)
-        //     {
-        //         if($from == $client)
-        //         {
-        //             $data['from'] = 'Me';
-        //         }
-        //         else
-        //         {
-        //             $data['from'] = $sender_user_name;
-        //         }
+            $user_profile=$user_object1->getProfileById($data['userId']);
 
-        //         if($client->resourceId == $receiver_user_connection_id || $from == $client)
-        //         {   
-        //             $client->send(json_encode($data));
-        //         }
-        //         else
-        //         {
-        //             $private_chat_object->setStatus('No');
-        //             $private_chat_object->setChatMessageId($chat_message_id);
+            $receiver_user_connection_id = $receiver_user_data['user_connection_id'];
 
-        //             $private_chat_object->update_chat_status();
-        //         }
-        //     }
-        // }
-        if($data['command'] == 'news')
+            foreach($this->clients as $client)
+            {
+                if($from == $client)
+                {
+                    $data['from'] = 'Me';
+                }
+                else
+                {
+                    $data['from'] = $sender_user_name;
+                }
+
+                if($client->resourceId == $receiver_user_connection_id || $from == $client)
+                {   
+                    $client->send(json_encode($data));
+                }
+                else
+                {
+                    $private_chat_object->setStatus('No');
+                    $private_chat_object->setChatMessageId($chat_message_id);
+
+                    $private_chat_object->update_chat_status();
+                }
+            }
+        }
+        else if($data['command'] == 'news')
         {    //news
             $chat_object = new \News;
 
@@ -141,6 +145,9 @@ class Chat implements MessageComponentInterface {
             $chat_object->setCreatedOn(date("Y-m-d"));
     
             $chat_object->save_News();
+            $new_object =new \News;
+            $id =$new_object->getIdMax();
+            
     
             $user_object = new \ChatUser;
     
@@ -151,6 +158,8 @@ class Chat implements MessageComponentInterface {
             $user_name = $user_data['user_name'];
     
             $data['dt'] = date("d-m-Y ");
+            $data['newsId']=$id;
+
             foreach ($this->clients as $client) {
                
                 $data['from'] = $user_name;
@@ -159,49 +168,61 @@ class Chat implements MessageComponentInterface {
                 $client->send(json_encode($data));
             }
         }
-        // else
-        // {
-        //     //group chat
+        else if($data['command'] == 'chatroom')
+        {
+            //group chat
 
-        //     $chat_object = new \ChatRooms;
+            $chat_object = new \ChatRooms;
 
-        //     $chat_object->setUserId($data['userId']);
+            $chat_object->setUserId($data['userId']);
 
-        //     $chat_object->setMessage($data['msg']);
+            $chat_object->setMessage($data['msg']);
 
-        //     $chat_object->setCreatedOn(date("Y-m-d h:i:s"));
+            $chat_object->setCreatedOn(date("Y-m-d h:i:s"));
 
-        //     $chat_object->save_chat();
+            $chat_object->save_chat();
 
-        //     $user_object = new \ChatUser;
+            $user_object = new \ChatUser;
 
-        //     $user_object->setUserId($data['userId']);
+            $user_object->setUserId($data['userId']);
 
-        //     $user_data = $user_object->get_user_data_by_id();
+            $user_data = $user_object->get_user_data_by_id();
 
-        //     $user_name = $user_data['user_name'];
+            $user_name = $user_data['user_name'];
 
-        //     $data['dt'] = date("d-m-Y h:i:s");
+            $data['dt'] = date("d-m-Y h:i:s");
 
 
-        //     foreach ($this->clients as $client) {
-        //         /*if ($from !== $client) {
-        //             // The sender is not the receiver, send to each client connected
-        //             $client->send($msg);
-        //         }*/
+            foreach ($this->clients as $client) {
+               
 
-        //         if($from == $client)
-        //         {
-        //             $data['from'] = 'Me';
-        //         }
-        //         else
-        //         {
-        //             $data['from'] = $user_name;
-        //         }
+                if($from == $client)
+                {
+                    $data['from'] = 'Me';
+                }
+                else
+                {
+                    $data['from'] = $user_name;
+                }
 
-        //         $client->send(json_encode($data));
-        //     }
-        // }
+                $client->send(json_encode($data));
+            }
+        }
+        else if($data['command'] == 'delete')
+        {    //news
+            $chat_object = new \News;
+    
+            $chat_object->delete_News($data['newsId']);
+    
+            $data['msg']='reset';
+    
+            foreach ($this->clients as $client) {              
+
+                $client->send(json_encode($data));
+            }
+        }
+        
+        
     }
 
     public function onClose(ConnectionInterface $conn) {

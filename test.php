@@ -6,29 +6,18 @@ if(!isset($_SESSION['user_data']))
 	header('location:index.php');
 }
 
-require('database/ChatUser.php');
-
-require('database/News.php');
-
-$chat_object = new News;
-
-$chat_data = $chat_object->get_all_news_data();
-
-$user_object = new ChatUser;
-
-$user_data = $user_object->get_user_all_data();
+$login_user_id = '';
+                $login_user_name = '';
+                foreach($_SESSION['user_data'] as $key => $value)
+                {
+                  $login_user_id = $value['id'];
+                  $login_user_name=$value['name'];
+                  $login_user_profile=$value['profile'];
+                  
+                }
 
 
 
-				$login_user_id = '';
-        $login_user_name = '';
-				foreach($_SESSION['user_data'] as $key => $value)
-				{
-					$login_user_id = $value['id'];
-          $login_user_name=$value['name'];
-          $login_user_profile=$value['profile'];
-          
-        }
 
 ?>
 <!DOCTYPE html>
@@ -36,25 +25,7 @@ $user_data = $user_object->get_user_all_data();
   <head>
    
     
-  <link href="./vendor-front/bootstrap/nicepage.css" rel="stylesheet">
-    <link href="./vendor-front/bootstrap/style.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="vendor-front/parsley/parsley.css"/>
-
-	<link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One:400|Inconsolata:200,300,400,500,600,700,800,900">
-    
-	<script src="vendor-front/jquery/jquery.min.js"></script>	
-    <script src="vendor-front/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor-front/jquery-easing/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="vendor-front/parsley/dist/parsley.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script type="application/ld+json">
-    {
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "",
-		"url": "/"
-    }</script>
+  
     <style>
     .infor{
       width: 90%;
@@ -208,6 +179,7 @@ $user_data = $user_object->get_user_all_data();
   display: flex;
   justify-content: flex-end;
 }
+
   .btn-send {
     border: none;
     padding: 5px;
@@ -227,33 +199,37 @@ $user_data = $user_object->get_user_all_data();
   <body class="u-body">
     <section class="u-align-center u-clearfix u-gradient h-section-1" id="carousel_0fb8" style="display: flex;height:200vh">
       <div class="infor" id="infor">
-      <?php
-					foreach($chat_data as $chat)
-					{
+      <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
 
-						echo '
+      <?php
 					
-						
-								<div style="padding: 2% 10%; ">
-								  <div style="background-color: #e6e6e6; border-radius: 5px">
-									<b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
-                                    <small> <i>'.$chat["created_on"].'</i> </small>
-									<b style="color: red">'.$chat["title"].' </b>
-									<br />
-                                    <p>'.$chat["content"].'</p>
-                                    <br />
-									</div>
-                                    
-                                    
-								</div>
-						
-					
-						';
-					}
+          foreach($chat_data as $chat)
+          { $btn_del="";
+            $data_load='';
+            if ($chat["user_name"] == $login_user_name) 
+              $btn_del ='
+                               <button  name="btn_delete" >
+                               <a href="?delete='.$chat['id_news'].'">Delete</a>
+                               </button>';
+                           
+            $data_load.='<div style="padding: 2% 10%; ">
+            <div style="background-color: #e6e6e6; border-radius: 5px">'.$btn_del.'
+            <b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
+            <small> <i>'.$chat["created_on"].'</i> </small>
+            <b style="color: red">'.$chat["title"].' </b>
+            <br />
+            <p>'.$chat["content"].'</p>
+            <br />';
+            if($chat["file_name"] !="")
+               $data_load.='<img src="../'.$chat["file_name"].'" style="width: 200px; height: 200px">';
+            $data_load.='</div></div>';
+            echo $data_load;
+          }
+
 					?>
       </div>
       <div class="post">
-          <button class="btn_new" onclick="openMenu()">+ NEW</button>
+          <button class="btn_new" id="btn-new" onclick="openMenu()">+ NEW</button>
       </div>
         <div class="post-container" id="post">
         <div class="post-container__header">
@@ -314,14 +290,10 @@ $user_data = $user_object->get_user_all_data();
     
 
 <script type="text/javascript">
-	function openMenu() {
-    document.getElementById("post").style.left = "6%";
-    }
+	
 
-  function closeMenu() {
-    document.getElementById("post").style.left = "80%";
-    }
-	$(document).ready(function(){
+	$(document).ready(function()
+  {
 
 		var conn = new WebSocket('ws://localhost:8080');
 		conn.onopen = function(e) {
@@ -332,18 +304,30 @@ $user_data = $user_object->get_user_all_data();
 		    console.log(e.data);
 
 		    var data = JSON.parse(e.data);
+        
+        if (data!=null)
+        {
+          var row_class = '';
 
-		    var row_class = '';
+          var background_class = '';
 
-		    var background_class = '';
+          if (data.FileName !="")
+          {
+            var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px"><button name="btn-del"> <a href="?delete='+data.id_news+'">Delete</a></button>	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> <img src="'+data.FileName+'" style="width: 200px; height: 200px"> </div>	</div>'; 
 
-		    
-		    var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px">	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /></div>	</div>'; 
+          }
+          else
+          {
+            var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px"><button name="btn-del" > <a href="?delete='+data.id_news+'">Delete</a></button>	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> </div>	</div>'; 
 
-		    $('#infor').prepend(html_data);
+          }
 
-		    $("#title").val("");
-        $("#content").val("");
+          $('#infor').prepend(html_data);
+
+          $("#title").val("");
+          $("#content").val("");
+        }
+		   
 
 		};
 
@@ -370,7 +354,7 @@ $user_data = $user_object->get_user_all_data();
              fd.append('file',files[0]);
              var name='upload/'+files[0]['name'];
              $.ajax({
-                url:'upload.php',
+                url:'../upload.php',
                 type:'post',
                 data: fd, 
                 contentType:false,
@@ -385,42 +369,53 @@ $user_data = $user_object->get_user_all_data();
                 }
               });
               
-              var data = {
+              
+             
+      }
+      else name="";
+      var data = {
 					      userId : user_id,
 					      Title : title,
           			msg : content,
                 FileName: name,
           			command:'news'
 				};
+        conn.send(JSON.stringify(data));
 
-				conn.send(JSON.stringify(data));
-             
-      }
-          
-         
 			}
 
 		});
-		
 
+
+    // $("button[name=btn_delete]").click( function()
+    // { 
+	
+    //   var id_news =$(this).attr('value');
+    //   var data = {
+		// 			      userId :'user_id',
+    //             msg:id_news,
+    //       			command:'delete'
+		// 		};
+
+    //     conn.send(JSON.stringify(data));
+
+    // });
+   
 	});
 	
 </script>
-<script>
-//   function readURL(input) {
-//     if (input.files && input.files[0]) {
-//         var reader = new FileReader();
-        
-//         reader.onload = function (e) {
-//             $('#img').attr('src', e.target.result);
-//         }
-        
-//         reader.readAsDataURL(input.files[0]);
-//     }
-// }
 
-// $("#imgInp").change(function(){
-//     readURL(this);
-// });
+<script>
+
+function openMenu() 
+  {
+    document.getElementById("post").style.left = "6%";
+  }
+
+  function closeMenu() 
+  {
+    document.getElementById("post").style.left = "80%";
+  }
+
 </script>
 </html>

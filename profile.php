@@ -15,7 +15,7 @@ $user_id = '';
 
 foreach($_SESSION['user_data'] as $key => $value)
 {
-    $user_id = $value['id'];
+    $user_id = $value['id']; 
 }
 
 $user_object->setUserId($user_id);
@@ -56,7 +56,6 @@ if(isset($_POST['edit']))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chat application in php using web scocket programming</title>
 	<!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">
 
@@ -98,7 +97,7 @@ if(isset($_POST['edit']))
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" name="user_password" id="user_password" class="form-control" data-parsley-minlength="6" data-parsley-maxlength="12" data-parsley-pattern="^[a-zA-Z]+$" required value="<?php echo $user_data['user_password']; ?>" />
+                        <input type="password" name="user_password" id="user_password" class="form-control" data-parsley-minlength="6" data-parsley-maxlength="12"  required value="<?php echo $user_data['user_password']; ?>" />
                     </div>
                     <div class="form-group">
                         <label>Profile</label><br />

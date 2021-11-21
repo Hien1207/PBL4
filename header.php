@@ -112,4 +112,3 @@ require('database/ChatUser.php');
 
     </script>
    
-  

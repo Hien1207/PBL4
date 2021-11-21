@@ -76,7 +76,22 @@ class News
 
 		$this->connect = $database_object->connect();
 	}
+    
+	function getIdMax()
+	{
+		$query = "
+        select MAX(id_news) from news  ";
 
+		$statement = $this->connect->prepare($query);
+
+		$statement->execute();
+
+		while ($result = $statement->fetchAll())
+		{
+			return $result["id_news"];
+
+		}
+	}
 	function save_News()
 	{
 		$query = "
@@ -100,6 +115,18 @@ class News
 		$statement->execute();
 	}
 
+	function delete_News(String $id)
+	{
+		$query = "
+		DELETE FROM news where id_news = :id_news
+		";
+
+		$statement = $this->connect->prepare($query);
+
+		$statement->bindParam(':id_news', $id);
+
+		$statement->execute();
+	}
 	function get_all_news_data()
 	{
 		$query = "
@@ -115,6 +142,8 @@ class News
 
 		return $statement->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+
 }
 	
 ?>

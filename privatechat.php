@@ -94,10 +94,8 @@ require('database/ChatUser.php');
 				<input type="hidden" name="is_active_chat" id="is_active_chat" value="No" />
 
 				<div class="mt-3 mb-3 text-center">
-					<img src="<?php echo $value['profile']; ?>" class="img-fluid rounded-circle img-thumbnail" width="150" />
+					<img src="<?php echo $value['profile']; ?>" class="img-fluid rounded-circle img-thumbnail" width="100" />
 					<h3 class="mt-2"><?php echo $value['name']; ?></h3>
-					<!-- <a href="profile.php" class="btn btn-secondary mt-2 mb-2">Edit</a> -->
-					<!-- <input type="button" class="btn btn-primary mt-2 mb-2" id="logout" name="logout" value="Logout" /> -->
 				</div>
 				<?php
 				}
@@ -209,10 +207,14 @@ require('database/ChatUser.php');
 						<div class="`+row_class+`">
 							<div class="col-sm-10">
 								<div class="shadow-sm alert `+background_class+`">
-									<b>`+data.from+` - </b>`+data.msg+`<br />
+								<img src='".$user["user_profile"]."' class='img-fluid rounded-circle img-thumbnail' width='50' />
+                                <span>
+								    <b>`+data.from+` - </b>`+data.msg+`<br />
 									<div class="text-right">
 										<small><i>`+data.datetime+`</i></small>
 									</div>
+								</span>
+									
 								</div>
 							</div>
 						</div>
