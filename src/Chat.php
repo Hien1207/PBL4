@@ -100,9 +100,7 @@ class Chat implements MessageComponentInterface {
 
             $data['datetime'] = $timestamp;
 
-            $user_object1 = new \ChatUser;
-
-            $user_profile=$user_object1->getProfileById($data['userId']);
+            
 
             $receiver_user_connection_id = $receiver_user_data['user_connection_id'];
 
@@ -157,13 +155,13 @@ class Chat implements MessageComponentInterface {
     
             $user_name = $user_data['user_name'];
     
-            $data['dt'] = date("d-m-Y ");
+            $data['dt'] = date("Y-m-d ");
             $data['newsId']=$id;
 
             foreach ($this->clients as $client) {
                
                 $data['from'] = $user_name;
-              
+                echo print($data['newsId']);
 
                 $client->send(json_encode($data));
             }
@@ -190,7 +188,7 @@ class Chat implements MessageComponentInterface {
 
             $user_name = $user_data['user_name'];
 
-            $data['dt'] = date("d-m-Y h:i:s");
+            $data['dt'] = date("Y-m-d h:i:s");
 
 
             foreach ($this->clients as $client) {

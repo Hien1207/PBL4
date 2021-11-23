@@ -10,7 +10,15 @@ if(!isset($_SESSION['user_data']))
 }
 
 require('database/ChatUser.php');
-
+$login_user_id = '';
+        $login_user_name = '';
+				foreach($_SESSION['user_data'] as $key => $value)
+				{
+					$login_user_id = $value['id'];
+          $login_user_name=$value['name'];
+          $login_user_profile=$value['profile'];
+          
+        }
 
 ?>
 <!DOCTYPE html>
@@ -50,6 +58,8 @@ require('database/ChatUser.php');
             </span>
           </span>
         </h1>
+        <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
+
      
       <div class="u-nav u-spacing-30 u-unstyled u-nav-1" style="margin-left:50%;margin-top :15px;display:flex" >
         <a style="color:white;margin-right:20px"  href="home.php" target="main">Home</a>
@@ -59,7 +69,11 @@ require('database/ChatUser.php');
         <button onclick="myFunction()" class="dropbtn" style="padding: 0px;height:10px"><img src="https://cdn1.iconfinder.com/data/icons/menu-flat-shaded-1/512/DropDown_Menu-2-512.png" style="width:30px"></button>
         <div id="myDropdown" class="dropdown-content" >
         <a style="padding: 0px;" href='profile.php' target="main" >PROFILE</a>
-				<button style="padding: 0px;"  id="logout" name="logout" >LOG OUT</button>
+        <button style="padding: 0px;" id="logout" name="logout" > 
+        <a style="padding: 0px;" id="log" name="log" href='profile.php' target="_top" >LogOUT
+        </a>
+
+        </button>
         </div>
       </div>
       
@@ -101,8 +115,8 @@ require('database/ChatUser.php');
             if(response.status == 1)
             {
               conn.close();
+              // $("#logout_link")[0].click();
 
-              location = 'index.php';
             }
           }
         })

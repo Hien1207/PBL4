@@ -22,18 +22,19 @@
 		"url": "/"
     }</script>
     <style>
-        .form{
-            width: 30%;
-            height: 300px;
-            background-color: white;
-            padding: 6%;
-            margin: 10% 5% 10% 15%;
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-            transition: transform .2s;
-        }  
-        .form:hover {
-            transform: scale(1.05);
+        .width{
+          width: 50%;
+          height: 100%;
         }
+        .image{
+          width:100%;
+          height:100%;
+        }
+        .font_a{
+         color:black;
+         font-size:50px;
+        }
+        
     </style>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
@@ -41,12 +42,20 @@
     <link rel="canonical" href="/">
   </head>
   <body class="u-body">
-    <section class="u-align-center u-clearfix u-gradient h-section-1" id="carousel_0fb8" style="height: 647px;display:flex">
-       <div class="form">
-       <a style="color:black;margin-right:10px;font-size:50px;font-family: futura-light;"  href="chatroom.php" target="main">Group Chat</a>
-       </div>
-       <div class="form" style="margin: 10% 5%;">
-       <a style="color:black;margin-right: 10px;font-size:50px;font-family: futura-light;"  href="privatechat.php" target="main">Private Chat</a>
-       </div>
-    </section>
+       <div style="display: flex;height:320px">
+          <div class="width" style="padding: 7% 15%;">
+            <a class="font_a"  href="chatroom.php" target="main">Group Chat</a>
+          </div>
+          <div class="width">
+             <img class="image" src="https://1.bigdata-vn.com/wp-content/uploads/2021/09/1632555115_196_Hinh-anh-nen-dep-cho-may-tinh.jpg">
+          </div>
+      </div>
+      <div style="display: flex;height:325px">
+          <div class="width">
+             <img class="image" src="https://topshare.vn/wp-content/uploads/2020/08/Hinh-nen-lap-top-cute-21-1024x683.jpg">
+          </div>
+          <div class="width" style="padding: 7% 15%;">
+            <a class="font_a"  href="privatechat.php" target="main">Private Chat</a>
+          </div>
+      </div>
   </body>

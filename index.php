@@ -33,7 +33,7 @@ if(isset($_POST['login']))
 
                 $user_object->setUserToken($user_token);
 
-                if($user_object->update_user_login_data())
+                // if($user_object->update_user_login_data())
                 {
                     $_SESSION['user_data'][$user_data['user_id']] = [
                         'id'    =>  $user_data['user_id'],
@@ -73,7 +73,7 @@ if(isset($_POST['login']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ABC SCHOOL</title>
+    <title>Load Chat from Mysql Database | PHP Chat Application using Websocket</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -90,10 +90,25 @@ if(isset($_POST['login']))
     <script src="vendor-front/jquery-easing/jquery.easing.min.js"></script>
 
     <script type="text/javascript" src="vendor-front/parsley/dist/parsley.min.js"></script>
+    <style>
+    .unauth__layout {
+    width :100%;
+    background-image:url("https://preview.colorlib.com/theme/bootstrap/login-form-20/images/xbg.jpg.pagespeed.ic.tiVxeakBSd.webp");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+    .image{
+    height: 100vh;
+    background:rgba(5, 5, 5, 0.55);
+    box-sizing: border-box;
+    }
+    </style>
 </head>
 
 <body>
-
+  <div class="unauth__layout ">
+    <div class="image">
     <div class="container">
         <br />
         <br />
@@ -134,6 +149,12 @@ if(isset($_POST['login']))
                             </div>
                             <div class="form-group text-center">
                                 <input type="submit" name="login" id="login" class="btn btn-primary" value="Login" />
+                                <h6 style="margin-top: 5px;">or</h6>
+                                <p class="new-user">
+                                <span
+                                    ><a href="register.php">Create Account</a></span
+                                >
+                                </p>
                             </div>
                         </form>
                     </div>  
@@ -141,7 +162,8 @@ if(isset($_POST['login']))
             </div>
         </div>
     </div>
-
+    </div>
+  </div>
 </body>
 
 </html>

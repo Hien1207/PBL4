@@ -417,26 +417,7 @@ class ChatUser
 		return $user_id;
 	}
 
-	function getProfileById(String $id)
-	{
-		$query = "
-		SELECT * FROM chat_user_table 
-		WHERE user_id = :user_id
-		";
 
-		$statement = $this->connect->prepare($query);
-
-		$statement->bindParam(':user_id', $id);
-
-		$statement->execute();
-
-		while ($result = $statement->fetchAll())
-		{
-			return $result["user_profile"];
-
-		}
-
-	}
 
 }
 

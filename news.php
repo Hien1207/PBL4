@@ -79,7 +79,8 @@ $user_data = $user_object->get_user_all_data();
     }
     .post-container {
     width: 670px;
-    margin: 0% 25%;
+    margin: 2% 25%;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     left: 80%;
     display: flex;
     flex-direction: column;
@@ -100,6 +101,9 @@ $user_data = $user_object->get_user_all_data();
     margin: 5px;
     padding-left: 10px;
    font-family: "Pacifico", cursive;
+  }
+  .blog-title{
+    margin-left:40px;
   }
   .page-logo {
     height: 40px;
@@ -208,7 +212,6 @@ $user_data = $user_object->get_user_all_data();
   display: flex;
   justify-content: flex-end;
 }
-
   .btn-send {
     border: none;
     padding: 5px;
@@ -218,53 +221,150 @@ $user_data = $user_object->get_user_all_data();
     background-size: 100%;
     background-image: url(https://raw.githubusercontent.com/ductai26998/Mini-Blog/1002037f251ee951bc2882358ef46fc2b2d05d39/mini-blog/src/assets/icon/send.svg);
   }
-    </style>
+  .image {
+        width: 20%;
+        font-family:futura-light;
+      }
+      .text {
+        width: 80%;
+        display: block;
+        padding:5px 20px ;
+        font-family:futura-light;
+        border: 1px solid rgb(137, 137, 139);
+      }
+      .ava {
+        display: flex;
+        margin-right: auto;
+        padding-bottom: 5px;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        margin: 2px 0px;
+        border: 1px solid black;
+        border-radius: 50%;
+      }
+      .ad {
+        display: block;
+        margin: 2px;
+        width: 300px;
+      }
+      .ad-t {
+        height: 20px;
+        font-size: 15px;
+        display: flex;
+      }
+      .name {
+        border-bottom: 1px solid var(--gray-boder);
+      }
+      .delete{
+        width:100%;
+        background: white;
+
+      }
+      .delete:hover{
+        cursor: pointer;
+        background: #000;
+        color: white;
+      }
+  </style>
 
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
     <link rel="canonical" href="/">
   </head>
-  <body class="u-body">
-    <section class="u-align-center u-clearfix u-gradient h-section-1" id="carousel_0fb8" style="display: flex;height:200vh">
+  <body class="u-body" style="display: flex;">
       <div class="infor" id="infor">
-      <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
+      <input type="hidden" name="login_id" id="login_id"  value="<?php echo $login_user_id; ?>" />
 
       <?php
-					
-          foreach($chat_data as $chat)
-          { $btn_del="";
-            $data_load='';
-            if ($chat["user_name"] == $login_user_name) 
-              $btn_del ='
-                               <button  name="btn_delete" value="'.$chat["id_news"].'"  >Delete
-                               </button>';
-                           
-            $data_load.='<div style="padding: 2% 10%; ">
-            <div style="background-color: #e6e6e6; border-radius: 5px">'.$btn_del.'
-            <b style="color: blue">'.$chat["user_name"].'  </b>  <br/>
-            <small> <i>'.$chat["created_on"].'</i> </small>
-            <b style="color: red">'.$chat["title"].' </b>
-            <br />
-            <p>'.$chat["content"].'</p>
-            <br />';
+      
+					foreach($chat_data as $chat)
+					{
+            $btn_del="";
+            if ($chat["user_id"] == $login_user_id) 
+
+              $btn_del =    '   <div class="dropdown" style="display:flex">
+                               <button name="myFunction" class="dropbtn" style="padding: 0px;height:0px"><img src="https://cdn3.iconfinder.com/data/icons/web-interface-glyph/512/interface_-_site_-_web_-_development-22-512.png" style="width:30px"></button>
+                                  <div id="myDropdown" class="dropdown-content" >
+                                  <button class="delete"  name="btn_delete" value="'.$chat["id_news"].'"  >Delete </button>
+                                  </div>
+                                </div>';
+
             if($chat["file_name"] !="")
-              $data_load.='<img src="'.$chat["file_name"].'" style="width: 200px; height: 200px">';
-
-            $data_load.='</div></div>';
-            echo $data_load;
-          }
-
+            {
+              echo '
+					
+						
+              <div style="padding: 1% 10%;">
+                <div style=" border-radius:5px;display:flex;">
+                  <div class="image">
+                      <img src="'.$chat["file_name"].'" style="width:100%; height:100%">
+                  </div>
+                  <div class="text">
+                    <div class="ava">
+                      <div style="width:40px">
+                           <img class="avatar"  src="'.$chat["user_profile"].'"/>
+                      </div>  
+                      <div class="ad">
+                        <div class="ad-t">
+                          <b >'.$chat["user_name"].'  </b>
+                        </div>
+                        <div class="ad-t"> <small> <i>'.$chat["created_on"].'</i> </small> </div>
+                      </div>
+                      <div style="margin-left:60%">'.$btn_del.'</div>
+                    </div>
+                    <div class="name">
+                        <b style="font-size:20px">'.$chat["title"].' </b><br/>
+                        <h9 style="font-size:15px">'.$chat["content"].'</h9>
+                    </div>
+                 </div>
+                </div>                                          
+              </div>      
+          ';
+            }
+            else{
+              echo '
+							
+              <div style="padding: 1% 10%; ">
+                    <div class="text" style="width:100%">
+                    <div class="ava">
+                      <div style="width:40px">
+                          <img class="avatar" src="'.$chat["user_profile"].'"/>
+                      </div>  
+                      <div class="ad">
+                        <div class="ad-t">
+                          <b >'.$chat["user_name"].'  </b>
+                        </div>
+                        <div class="ad-t"> <small> <i>'.$chat["created_on"].'</i> </small> </div>
+                      </div>
+                      <div style="margin-left:550px">'.$btn_del.'</div>
+                    </div>
+                    <div class="name">
+                        <b style="font-size:20px">'.$chat["title"].' </b><br/>
+                        <h9 style="font-size:15px">'.$chat["content"].'</h9>
+                    </div>
+                </div>         
+              </div>
+          
+        
+          ';
+            }
+						
+					}
 					?>
       </div>
       <div class="post">
-          <button class="btn_new" id="btn-new" onclick="openMenu()">+ NEW</button>
+          <button class="btn_new" onclick="openMenu()">+ NEW</button>
       </div>
         <div class="post-container" id="post">
         <div class="post-container__header">
+          <input type="hidden" name="login_user_profile" id="login_user_profile"  value="<?php echo $login_user_profile; ?>" />
+
           <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
           <h4  class="post-title">Post information</h4>
-          <div style="margin-left: 200px;">
+          <div style="margin-left: 240px;">
                  <i class="fas fa-times" onclick="closeMenu()" id="fas-close"></i>
           </div>
         </div>
@@ -294,37 +394,69 @@ $user_data = $user_object->get_user_all_data();
               ></textarea>
             </div>
           </div>
-          <div>
+          <div style="text-align:center">
                 <input type='file' name="file" id="file" style="font-size: 10px;" placeholder="Image" />
-                <div class="preview">
-                  <img id="img" style="width: 50px; height:50px" src="" />
-                </div>
-                
+                <div>
+                  <img id="img" style="width: 130px; height:50px" src="" />
+                </div>   
           </div>
           <div class="post-box__send">
-              <button type="submit" class="btn-send" ></button>
+              <button type="submit" class="btn-send" onclick="closeMenu()"></button>
           </div>
         </form>
 
        
         </div>
-
-  
-    </section>
-   
-    
-
   </body>
-  
-    
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#img').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#file").change(function(){
+    readURL(this);
+});
+</script>
+<script>
+        
+        $("button[name=myFunction]").click( function()
+            { 
+              document.getElementById("myDropdown").classList.toggle("show");
+
+            });
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+            }
+        }
+    </script>   
 
 <script type="text/javascript">
-	
+	function openMenu() {
+    document.getElementById("post").style.left = "6%";
+    }
 
-	$(document).ready(function()
-  {
+  function closeMenu() {
+    document.getElementById("post").style.left = "80%";
+    }
+	$(document).ready(function(){
 
-		var conn = new WebSocket('ws://localhost:8080');
+    var conn = new WebSocket('ws://localhost:8080');
 		conn.onopen = function(e) {
 		    console.log("Connection established!");
 		};
@@ -335,16 +467,71 @@ $user_data = $user_object->get_user_all_data();
 		    var data = JSON.parse(e.data);
         
         if (data.msg != 'reset')
-        {
+        {  var btn_del='';
+          if (data.userId ==  $('#login_id').val() )
+          {
+            btn_del='   <div class="dropdown" style="display:flex">'+
+                               '<button name="myFunction" class="dropbtn" style="padding: 0px;height:0px"><img src="https://cdn3.iconfinder.com/data/icons/web-interface-glyph/512/interface_-_site_-_web_-_development-22-512.png" style="width:30px"></button>'+
+                                  '<div id="myDropdown" class="dropdown-content" >'+
+                                 ' <button class="delete"  name="btn_delete" value="'+data.newsId+'"  >Delete </button>'+
+                                 ' </div>'+
+                               ' </div>';
+          }
+          
               if (data.FileName !="")
             {
-              var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px"><button name="btn_delete" value="'+data.newsId+'" >Delete</button>	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> <img src="'+data.FileName+'" style="width: 200px; height: 200px"> </div>	</div>'; 
+              var html_data =  '<div style="padding: 1% 10%;">'+
+                '<div style=" border-radius:5px;display:flex;">'+
+                  '<div class="image">'+
+                    '  <img src="'+data.FileName+'" style="width:100%; height:100%">'+
+                  '</div>'+
+                  '<div class="text">'+
+                    '<div class="ava">'+
+                     ' <div style="width:40px">'+
+                         ' <img class="avatar"  src="'+data.profile+'"/>'+
+                     ' </div>  '+
+                     ' <div class="ad">'+
+                        '<div class="ad-t">'+
+                          '<b >'+data.from+'  </b>'+
+                       ' </div>'+
+                        '<div class="ad-t"> <small> <i>'+data.dt+'</i> </small> </div>'+
+                     ' </div>'+
+                     ' <div style="margin-left:60 %">'+btn_del+'</div>'+
+                    '</div>'+
+                   ' <div class="name">'+
+                        '<b style="font-size:20px">'+data.Title+' </b><br/>'+
+                       ' <h9 style="font-size:15px">'+data.msg+'</h9>'+
+                   ' </div>'+
+                ' </div>'+
+               ' </div>     '                     +                
+             ' </div>      '
+          ;  
 
             }
             else
             {
-              var html_data = '<div style="padding: 2% 10%; "> <div style="background-color: #e6e6e6; border-radius: 5px"><button name="btn_delete" value="'+data.newsId+'" >Delete</button>	<b style="color: blue">'+data.from+'  </b>  <br/> <small> <i>'+data.dt+'</i> </small>	<b style="color: red">'+data.Title+' </b><br /><p>'+data.msg+'</p><br /> </div>	</div>'; 
+              var html_data = ' <div style="padding: 1% 10%; ">'+
+                 '   <div class="text" style="width:100%">'+
+                    '<div class="ava">'+
+                      '<div style="width:40px">'+
+                          '<img class="avatar" src="'+data.profile+'"/>'+
+                     ' </div>  '+
+                      '<div class="ad">'+
+                        '<div class="ad-t">'+
+                          '<b >'+data.from+'  </b>'+
+                        '</div>'+
+                        '<div class="ad-t"> <small> <i>'+data.dt+'</i> </small> </div>'+
+                      '</div>'+
+                      '<div style="margin-left:50%">'+btn_del+'</div>'+
+                    '</div>'+
+                    '<div class="name">'+
+                        '<b style="font-size:20px">'+data.Title+' </b><br/>'+
+                        '<h9 style="font-size:15px">'+data.msg+'</h9>'+
+                    '</div>'+
+                '</div> '+        
+              '</div>'
 
+          ;
             }
             $('#infor').prepend(html_data);
 
@@ -369,6 +556,8 @@ $user_data = $user_object->get_user_all_data();
 			if($('#news_form').parsley().isValid())
 			{  
           var user_id= $('#login_user_id').val();
+
+          var user_profile= $('#login_user_profile').val();
 
 				  var title = $('#title').val();
 
@@ -406,6 +595,7 @@ $user_data = $user_object->get_user_all_data();
 					      Title : title,
           			msg : content,
                 FileName: name,
+                profile:user_profile,
           			command:'news'
 				};
         conn.send(JSON.stringify(data));
@@ -418,7 +608,8 @@ $user_data = $user_object->get_user_all_data();
     
     $("button[name=btn_delete]").click( function()
     { 
-	    alert("Do you want DELETE item ? ")
+	    alert("Do you want DELETE item ? ");
+
       var id_news =$(this).attr('value');
       var data = {
 					      userId :'user_id',
@@ -432,19 +623,7 @@ $user_data = $user_object->get_user_all_data();
    
 	});
 	
+	
 </script>
 
-<script>
-
-function openMenu() 
-  {
-    document.getElementById("post").style.left = "6%";
-  }
-
-  function closeMenu() 
-  {
-    document.getElementById("post").style.left = "80%";
-  }
-
-</script>
 </html>

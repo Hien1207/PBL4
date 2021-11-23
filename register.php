@@ -16,7 +16,7 @@ if(isset($_POST["register"]))
 
     if(isset($_SESSION['user_data']))
     {
-        header('location:index.php');
+        header('location:chatroom.php');
     }
 
     require_once('database/ChatUser.php');
@@ -31,7 +31,7 @@ if(isset($_POST["register"]))
 
     $user_object->setUserProfile($user_object->make_avatar(strtoupper($_POST['user_name'][0])));
 
-    $user_object->setUserStatus('Enable');
+    $user_object->setUserStatus('Disabled');
 
     $user_object->setUserCreatedOn(date('Y-m-d H:i:s'));
 
@@ -69,17 +69,19 @@ if(isset($_POST["register"]))
 
             $mail->isHTML(true);
 
-            $mail->Subject = 'Registration Verification ';
+            $mail->Subject = 'Registration Verification for Chat Application Demo';
 
             $mail->Body = '
-            <p>Thank you for registering for ABC SCHOOL website.</p>
-                
+            <p>Thank you for registering for Chat Application Demo.</p>
+                <p>This is a verification email, please click the link to verify your email address.</p>
+                <p><a href="http://localhost:81/tutorial/chat_application/verify.php?code='.$user_object->getUserVerificationCode().'">Click to Verify</a></p>
+                <p>Thank you...</p>
             ';
 
             $mail->send();
 
 
-            $success_message = 'Create account success! Click login to access ABC SCHOOL website';
+            $success_message = 'Verification Email sent to ' . $user_object->getUserEmail() . ', so before login first verify your email';
         }
         else
         {
@@ -102,7 +104,7 @@ if(isset($_POST["register"]))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Register </title>
+    <title>Register | PHP Chat Application using Websocket</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor-front/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -119,16 +121,30 @@ if(isset($_POST["register"]))
     <script src="vendor-front/jquery-easing/jquery.easing.min.js"></script>
 
     <script type="text/javascript" src="vendor-front/parsley/dist/parsley.min.js"></script>
+    <style>
+        .unauth__layout {
+        width :100%;
+        background-image:url("https://preview.colorlib.com/theme/bootstrap/login-form-20/images/xbg.jpg.pagespeed.ic.tiVxeakBSd.webp");
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        }
+        .image{
+        height: 100vh;
+        background:rgba(5, 5, 5, 0.55);
+        box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
-
+   <div class="unauth__layout ">
+    <div class="image">
     <div class="containter">
         <br />
         <br />
-        <h1 class="text-center">Register Account</h1>
         
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center" style="width:100%">
             <div class="col col-md-4 mt-5">
                 <?php
                 if($error != '')
@@ -175,9 +191,13 @@ if(isset($_POST["register"]))
 
                             <div class="form-group text-center">
                                 <input type="submit" name="register" class="btn btn-success" value="Register" />
-                            </div>
-                            <div class="form-group text-center">
-                                <a href="index.php">Have you had account? Login</a>
+                                <br/><br/>
+                                <p class="new-user">
+                                    Already have a account?
+                                <span
+                                    ><a href="index.php">Login</a></span
+                                >
+                                </p>
                             </div>
 
                         </form>
@@ -188,6 +208,8 @@ if(isset($_POST["register"]))
             </div>
         </div>
     </div>
+    </div>
+   </div>
 
 </body>
 

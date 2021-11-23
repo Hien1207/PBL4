@@ -34,7 +34,7 @@
             <div class="u-layout-row">
               <div class="u-size-15 u-size-30-md">
                 <div class="u-layout-col">
-                  <div class="u-container-style u-image u-layout-cell u-size-40" style="background-image: url(https://thuthuatnhanh.com/wp-content/uploads/2019/02/hinh-anh-tinh-ban-hoc-duong-840x504.jpg);" data-image-width="770" data-image-height="600">
+                  <div class="u-container-style u-image u-layout-cell u-size-40" style="background-image: url(https://images.theconversation.com/files/116721/original/image-20160330-28476-o8slfq.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop);" data-image-width="770" data-image-height="600">
                     <div class="u-container-layout h-container-layout-1" style="height: 400px;"></div>
                   </div>
                   <div class="u-container-style u-hidden-md u-hidden-sm u-hidden-xs u-layout-cell u-size-20 h-layout-cell-2">
@@ -47,14 +47,14 @@
                   <div class="u-container-style u-hidden-md u-hidden-sm u-hidden-xs u-layout-cell u-size-20 h-layout-cell-3">
                     <div class="u-container-layout h-container-layout-3"></div>
                   </div>
-                  <div class="u-container-style u-image u-layout-cell u-size-40 " style="background-image: url(https://chuyenlequydondb.edu.vn/uploads/news/2017_01/16107349_1535751583116817_2416163219154310109_o.jpg);" data-image-width="800" data-image-height="896">
+                  <div class="u-container-style u-image u-layout-cell u-size-40 " style="background-image: url(https://news.ufl.edu/media/newsufledu/images/2018/04/Children-in-classroom_04-03-18.jpg);" data-image-width="800" data-image-height="896">
                     <div class="u-container-layout h-container-layout-4" style="height: 300px;"></div>
                   </div>
                 </div>
               </div>
               <div class="u-size-15 u-size-30-md">
                 <div class="u-layout-col">
-                  <div class="u-container-style u-image u-layout-cell u-size-40 " style="background-image: url(http://icdn.dantri.com.vn/zoom/1200_630/2017/photo-3-1495463900668.png);" data-image-width="800" data-image-height="533">
+                  <div class="u-container-style u-image u-layout-cell u-size-40 " style="background-image: url(https://i.guim.co.uk/img/media/0c4e9538ad08a696d93e54120812c91eefdc6e88/751_403_2971_1783/master/2971.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=908e97ed85432a9cb3e2f366ee242acc);" data-image-width="800" data-image-height="533">
                     <div class="u-container-layout h-container-layout-5" style="height: 300px;"></div>
                   </div>
                   <div class="u-container-style u-hidden-md u-hidden-sm u-hidden-xs u-layout-cell u-size-20 h-layout-cell-6">
@@ -67,7 +67,7 @@
                   <div class="u-container-style u-hidden-md u-hidden-sm u-hidden-xs u-layout-cell u-size-20 h-layout-cell-7">
                     <div class="u-container-layout h-container-layout-7"></div>
                   </div>
-                  <div class="u-container-style u-image u-layout-cell u-size-40" style="background-image: url(https://media.chuabavang.com/files/f1/2020/12/buoi-sinh-hoat-ngoai-khoa-y-nghia-cua-cac-em-hoc-sinh-truong-tieu-hoc-yen-tho-quang-ninh.jpg);" data-image-width="640" data-image-height="426">
+                  <div class="u-container-style u-image u-layout-cell u-size-40" style="background-image: url(https://i1.wp.com/www.additudemag.com/wp-content/uploads/2019/03/GettyImages-950604826.jpg?resize=1280%2C720px&ssl=1);" data-image-width="640" data-image-height="426">
                     <div class="u-container-layout h-container-layout-8" style="height: 300px;"></div>
                   </div>
                 </div>

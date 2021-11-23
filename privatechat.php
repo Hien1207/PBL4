@@ -207,13 +207,10 @@ require('database/ChatUser.php');
 						<div class="`+row_class+`">
 							<div class="col-sm-10">
 								<div class="shadow-sm alert `+background_class+`">
-								<img src='".$user["user_profile"]."' class='img-fluid rounded-circle img-thumbnail' width='50' />
-                                <span>
 								    <b>`+data.from+` - </b>`+data.msg+`<br />
 									<div class="text-right">
 										<small><i>`+data.datetime+`</i></small>
 									</div>
-								</span>
 									
 								</div>
 							</div>
@@ -269,7 +266,7 @@ require('database/ChatUser.php');
 			</div>
 			<form id="chat_form" method="POST" data-parsley-errors-container="#validation_error">
 				<div class="input-group mb-3" style="height:7vh">
-					<textarea class="form-control" id="chat_message" name="chat_message" placeholder="Type Message Here" data-parsley-maxlength="1000" data-parsley-pattern="/^[a-zA-Z0-9 ]+$/" required></textarea>
+					<textarea class="form-control" id="chat_message" name="chat_message" placeholder="Type Message Here" data-parsley-maxlength="1000"  required></textarea>
 					<div class="input-group-append">
 						<button type="submit" name="send" id="send" class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
 					</div>

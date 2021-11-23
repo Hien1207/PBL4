@@ -92,7 +92,7 @@ class News
 
 		}
 	}
-	function save_News()
+	function save_News() 
 	{
 		$query = "
 		INSERT INTO news 

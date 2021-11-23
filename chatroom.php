@@ -131,7 +131,7 @@ $user_data = $user_object->get_user_all_data();
 
 				<form method="post" id="chat_form" data-parsley-errors-container="#validation_error">
 					<div class="input-group mb-3">
-						<textarea class="form-control" id="chat_message" name="chat_message" placeholder="Type Message Here" data-parsley-maxlength="1000" data-parsley-pattern="/^[a-zA-Z0-9\s]+$/" required></textarea>
+						<textarea class="form-control" id="chat_message" name="chat_message" placeholder="Type Message Here" data-parsley-maxlength="1000" required></textarea>
 						<div class="input-group-append">
 							<button type="submit" name="send" id="send" class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
 						</div>
