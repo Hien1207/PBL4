@@ -42,7 +42,7 @@
     <link rel="canonical" href="/">
   </head>
   <body class="u-body">
-       <div style="display: flex;height:320px">
+       <div style="display: flex;height:260px">
           <div class="width" style="padding: 7% 15%;">
             <a class="font_a"  href="chatroom.php" target="main">Group Chat</a>
           </div>
@@ -50,7 +50,7 @@
              <img class="image" src="https://1.bigdata-vn.com/wp-content/uploads/2021/09/1632555115_196_Hinh-anh-nen-dep-cho-may-tinh.jpg">
           </div>
       </div>
-      <div style="display: flex;height:325px">
+      <div style="display: flex;height:260px">
           <div class="width">
              <img class="image" src="https://topshare.vn/wp-content/uploads/2020/08/Hinh-nen-lap-top-cute-21-1024x683.jpg">
           </div>

@@ -89,7 +89,7 @@ if(isset($_POST['edit']))
                 <form method="post" id="profile_form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="user_name" id="user_name" class="form-control" data-parsley-pattern="/^[a-zA-Z\s]+$/" required value="<?php echo $user_data['user_name']; ?>" />
+                        <input type="text" name="user_name" id="user_name" class="form-control"  required value="<?php echo $user_data['user_name']; ?>" />
                     </div>
                     <div class="form-group">
                         <label>Email</label>

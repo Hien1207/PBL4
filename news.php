@@ -70,7 +70,7 @@ $user_data = $user_object->get_user_all_data();
       margin-top: 30px;
       font-weight: 700;
       font-family: futura-light;
-      border-radius: 20px;
+      border-radius: 20px ;
     }
     .btn_new:hover{
       background: black;
@@ -100,7 +100,6 @@ $user_data = $user_object->get_user_all_data();
     font-weight: 500;
     margin: 5px;
     padding-left: 10px;
-   font-family: "Pacifico", cursive;
   }
   .blog-title{
     margin-left:40px;
@@ -130,7 +129,6 @@ $user_data = $user_object->get_user_all_data();
   height: 50px;
 }
   label {
-      font-family:"Pacifico", cursive;
       margin-right: 10px;
     }
     .input-title {
@@ -197,7 +195,6 @@ $user_data = $user_object->get_user_all_data();
 
   label{
     cursor: pointer;
-    font-family: "Pacifico", cursive;
     padding: 5px;
     width: 100px;
     text-align: center;
@@ -230,32 +227,40 @@ $user_data = $user_object->get_user_all_data();
         display: block;
         padding:5px 20px ;
         font-family:futura-light;
-        border: 1px solid rgb(137, 137, 139);
+        border: 2px solid #478ac9;
       }
       .ava {
         display: flex;
-        margin-right: auto;
         padding-bottom: 5px;
       }
       .avatar {
         width: 40px;
         height: 40px;
         margin: 2px 0px;
-        border: 1px solid black;
+        border: 2px solid #478ac9;
         border-radius: 50%;
       }
       .ad {
         display: block;
         margin: 2px;
+        margin-left: 10px;
         width: 300px;
       }
       .ad-t {
         height: 20px;
         font-size: 15px;
         display: flex;
+        color: #478ac9;
+      }
+      .title {
+        text-shadow: 1px 0 0 #478ac9, -1px 0 0 #478ac9, 0 1px 0 #478ac9, 0 -1px 0 #478ac9, 1px 1px #478ac9, -1px -1px 0 #478ac9, 1px -1px 0 #478ac9, -1px 1px 0 #478ac9;
+        font-size:20px; 
+        text-transform:uppercase;
+        color: red;
       }
       .name {
         border-bottom: 1px solid var(--gray-boder);
+        margin: 2px;
       }
       .delete{
         width:100%;
@@ -264,8 +269,12 @@ $user_data = $user_object->get_user_all_data();
       }
       .delete:hover{
         cursor: pointer;
-        background: #000;
+        background: #478ac9;
         color: white;
+      }
+      pre{
+        font-family:futura-light;
+
       }
   </style>
 
@@ -313,11 +322,11 @@ $user_data = $user_object->get_user_all_data();
                         </div>
                         <div class="ad-t"> <small> <i>'.$chat["created_on"].'</i> </small> </div>
                       </div>
-                      <div style="margin-left:60%">'.$btn_del.'</div>
+                      <div style="margin-left:400px">'.$btn_del.'</div>
                     </div>
                     <div class="name">
-                        <b style="font-size:20px">'.$chat["title"].' </b><br/>
-                        <h9 style="font-size:15px">'.$chat["content"].'</h9>
+                        <b  class="title">'.$chat["title"].' </b><br/>
+                        <pre style="font-size:15px">'.$chat["content"].'</pre>
                     </div>
                  </div>
                 </div>                                          
@@ -342,8 +351,8 @@ $user_data = $user_object->get_user_all_data();
                       <div style="margin-left:550px">'.$btn_del.'</div>
                     </div>
                     <div class="name">
-                        <b style="font-size:20px">'.$chat["title"].' </b><br/>
-                        <h9 style="font-size:15px">'.$chat["content"].'</h9>
+                        <b class="title">'.$chat["title"].' </b><br/>
+                        <pre style="font-size:15px; ">'.$chat["content"].'</pre>
                     </div>
                 </div>         
               </div>
@@ -363,8 +372,8 @@ $user_data = $user_object->get_user_all_data();
           <input type="hidden" name="login_user_profile" id="login_user_profile"  value="<?php echo $login_user_profile; ?>" />
 
           <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
-          <h4  class="post-title">Post information</h4>
-          <div style="margin-left: 240px;">
+          <h4  class="post-title">POST INFORMATION</h4>
+          <div style="margin-left: 200px;">
                  <i class="fas fa-times" onclick="closeMenu()" id="fas-close"></i>
           </div>
         </div>
@@ -496,14 +505,14 @@ $("#file").change(function(){
                        ' </div>'+
                         '<div class="ad-t"> <small> <i>'+data.dt+'</i> </small> </div>'+
                      ' </div>'+
-                     ' <div style="margin-left:60 %">'+btn_del+'</div>'+
+                     ' <div style="margin-left:400px;">'+btn_del+'</div>'+
                     '</div>'+
                    ' <div class="name">'+
-                        '<b style="font-size:20px">'+data.Title+' </b><br/>'+
-                       ' <h9 style="font-size:15px">'+data.msg+'</h9>'+
+                        '<b class="title">'+data.Title+' </b><br/>'+
+                       ' <pre style="font-size:15px">'+data.msg+'</pre>'+
                    ' </div>'+
                 ' </div>'+
-               ' </div>     '                     +                
+               ' </div>     '    +                
              ' </div>      '
           ;  
 
@@ -522,11 +531,11 @@ $("#file").change(function(){
                         '</div>'+
                         '<div class="ad-t"> <small> <i>'+data.dt+'</i> </small> </div>'+
                       '</div>'+
-                      '<div style="margin-left:50%">'+btn_del+'</div>'+
+                      '<div style="margin-left:500px;">'+btn_del+'</div>'+
                     '</div>'+
                     '<div class="name">'+
-                        '<b style="font-size:20px">'+data.Title+' </b><br/>'+
-                        '<h9 style="font-size:15px">'+data.msg+'</h9>'+
+                        '<b class="title">'+data.Title+' </b><br/>'+
+                        '<pre style="font-size:15px">'+data.msg+'</pre>'+
                     '</div>'+
                 '</div> '+        
               '</div>'

@@ -44,6 +44,16 @@ $login_user_id = '';
 		"name": "",
 		"url": "/"
     }</script>
+    <style>
+      .avatar {
+        width: 40px;
+        height: 40px;
+        margin-top: 10px;
+        margin-left: 500px;
+        border: 2px solid #478ac9;
+        border-radius: 50%;
+      }
+    </style>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
@@ -58,10 +68,11 @@ $login_user_id = '';
             </span>
           </span>
         </h1>
-        <input type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
-
+        <input  type="hidden" name="login_user_id" id="login_user_id"  value="<?php echo $login_user_id; ?>" />
+        <img class="avatar" src="<?php echo $login_user_profile ?>" >
      
-      <div class="u-nav u-spacing-30 u-unstyled u-nav-1" style="margin-left:50%;margin-top :15px;display:flex" >
+      <div class="u-nav u-spacing-30 u-unstyled u-nav-1" style="margin-left:10px;margin-top :15px;display:flex" >
+
         <a style="color:white;margin-right:20px"  href="home.php" target="main">Home</a>
         <a style="color:white;margin-right:20px"  href="news.php" target="main">News</a>
         <a style="color:white;margin-right:20px"  href="chat.php" target="main">Chat</a>
@@ -70,8 +81,8 @@ $login_user_id = '';
         <div id="myDropdown" class="dropdown-content" >
         <a style="padding: 0px;" href='profile.php' target="main" >PROFILE</a>
         <button style="padding: 0px;" id="logout" name="logout" > 
-        <a style="padding: 0px;" id="log" name="log" href='profile.php' target="_top" >LogOUT
-        </a>
+          <a style="padding: 0px;" id="log" name="log" href='index.php' target="_top" >LogOut
+          </a>
 
         </button>
         </div>
